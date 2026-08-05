@@ -26,13 +26,13 @@ class Solution {
             arr[index++] = curr.val;
             curr=curr.next;
         }
-        for(int i=0;i<len-1;i++){
-            for(int j=i+1;j<len;j++){
-                if(arr[i]<arr[j]){
-                    n_max[i]=arr[j];
-                    break;
-                }
+        Deque<Integer> stack = new ArrayDeque<>();
+        for(int i=0;i<len;i++){
+            while(!stack.isEmpty() && arr[i] > arr[stack.peek()]){
+                int val = stack.pop();
+                n_max[val] = arr[i];
             }
+            stack.push(i);
         }
         return n_max;
     }
